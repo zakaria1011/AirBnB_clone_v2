@@ -24,13 +24,7 @@ sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 sudo chown -R ubuntu:ubuntu /data/
 
 # Update Nginx configuration
-config_text="location /hbnb_static {
-    alias /data/web_static/current/;
-    index index.html;
-}"
-
-sudo sed -i "/server {/a $config_text" /etc/nginx/sites-available/default
-
+sed -i '51 i \\n\tlocation /hbnb_static {\n\talias /data/web_static/current;\n\t}' /etc/nginx/sites-available/default
 # Restart Nginx
 sudo service nginx restart
 
