@@ -8,8 +8,9 @@ import os
 WEB_STATIC_PATH = 'web_static'
 VERSIONS_PATH = 'versions'
 
-@task
+
 def do_pack():
+    """ """
     if not os.path.exists(VERSIONS_PATH):
         os.makedirs(VERSIONS_PATH)
 
@@ -20,9 +21,9 @@ def do_pack():
     tar_command = 'tar -cvzf {} {}'.format(archive_path, WEB_STATIC_PATH)
 
     local(tar_command)
-
+    size = os.path.getsize(archive_path)
     if os.path.exists(archive_path):
-        print('web_static packed: {} -> {} Bytes'.format(archive_path, os.path.getsize(archive_path)))
+        print('web_static packed: {} -> {} Bytes'.format(archive_path, size))
         return archive_path
     else:
         print('Failed to create the archive.')
