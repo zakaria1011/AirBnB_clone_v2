@@ -2,7 +2,7 @@
 """ archive the web static folder """
 
 
-from fabric.api import task, local
+from fabric import task
 from datetime import datetime
 import os
 
