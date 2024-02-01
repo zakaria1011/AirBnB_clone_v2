@@ -5,7 +5,7 @@ from fabric.api import task, local
 from datetime import datetime
 import os
 
-WEB_STATIC_PATH = './web_static'
+WEB_STATIC_PATH = 'web_static'
 VERSIONS_PATH = 'versions'
 
 @task
