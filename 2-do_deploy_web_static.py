@@ -7,7 +7,7 @@ from fabric.api import env, put, run, local
 from os.path import exists
 
 env.hosts = ['107.23.119.223', '54.89.118.36']
-env.user = 'ubuntu'  # Replace with your SSH username
+env.user = 'ubuntu'
 
 
 def do_deploy(archive_path):
