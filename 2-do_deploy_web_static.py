@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+""" """
 from fabric.api import env, run, put
 from os.path import exists
 
@@ -6,6 +7,7 @@ env.hosts = ['107.23.119.223', '54.89.118.36']
 
 
 def do_deploy(archive_path):
+    """  """
     if not exists(archive_path):
         return False
 
