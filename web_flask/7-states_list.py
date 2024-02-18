@@ -1,38 +1,24 @@
 #!/usr/bin/python3
-""" flask app """
-from flask import Flask, render_template, request, g
-import mysql.connector
-
+"""
+start flask web application
+"""
+from flask import Flask, render_template
+from models import storage
+from models.state import State
 app = Flask(__name__)
-
-
-def connect_db():
-    """ connect database """
-    return mysql.connector.connect(
-        host='localhost',
-        user='zakaria',
-        password='1L0v3T0C0d3!',
-        database='hbnb_dev_db'
-    )
 
 
 @app.teardown_appcontext
 def teardown(exception):
-    """Close the database connection"""
-    db = getattr(g, '_database', None)
-    if db is not None:
-        db.cursor().close()
+    """ close the storage"""
+    storage.close()
 
 
 @app.route('/states_list', strict_slashes=False)
-def show_data():
-    """ show data """
-    db = connect_db()
-    cursor = db.cursor()
-    cursor.execute('SELECT * FROM states')
-    states = cursor.fetchall()
-    cursor.close()
-    sorted_states = sorted(states, key=lambda state: state[3])
+def states_list():
+    """Display an html page with states list """
+    states = storage.all(State).values()
+    sorted_states = sorted(states, key=lambda state: state.name)
     return render_template('7-states_list.html', states=sorted_states)
 
 
